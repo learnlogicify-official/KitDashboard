@@ -207,7 +207,14 @@ export default function Home() {
                 </div>
                 <Text className="text-white/80 text-sm mb-1">Overall Improvement</Text>
                 <Metric className="text-2xl font-bold text-white">
-                  {stats?.overallImprovement >= 0 ? '+' : ''}{stats?.overallImprovement.toFixed(1)}%
+                  {stats?.overallImprovement !== undefined ? (
+                    <>
+                      {stats.overallImprovement >= 0 ? '+' : ''}
+                      {stats.overallImprovement.toFixed(1)}%
+                    </>
+                  ) : (
+                    'N/A'
+                  )}
                 </Metric>
               </div>
             </Card>
@@ -503,11 +510,9 @@ export default function Home() {
                           precision: 0.01,
                           velocity: 0
                         }}
-                        cellOpacity={0.8}
-                        cellHoverOpacity={1}
-                        cellHoverOthersOpacity={0.5}
-                        cellBorderWidth={0}
-                        cellBorderColor="#ffffff"
+                        opacity={0.8}
+                        borderWidth={0}
+                        borderColor="#ffffff"
                         enableGridX={false}
                         enableGridY={false}
                         tooltip={({ cell }) => (
@@ -577,11 +582,9 @@ export default function Home() {
                           precision: 0.01,
                           velocity: 0
                         }}
-                        cellOpacity={0.8}
-                        cellHoverOpacity={1}
-                        cellHoverOthersOpacity={0.5}
-                        cellBorderWidth={0}
-                        cellBorderColor="#ffffff"
+                        opacity={0.8}
+                        borderWidth={0}
+                        borderColor="#ffffff"
                         enableGridX={false}
                         enableGridY={false}
                         tooltip={({ cell }) => (
