@@ -603,6 +603,141 @@ export default function Home() {
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                      Department Performance Trends
+                    </Text>
+                    <Text className="text-gray-600 mt-2">
+                      Average scores across departments for both attempts
+                    </Text>
+                  </div>
+                </div>
+                <div className="h-[400px] w-full bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
+                  <ResponsiveLine
+                    data={[
+                      {
+                        id: 'Attempt 1',
+                        data: stats.departments.map(dept => ({
+                          x: dept.name,
+                          y: dept.attempt1Average
+                        })),
+                        color: '#6366f1'
+                      },
+                      {
+                        id: 'Attempt 2',
+                        data: stats.departments.map(dept => ({
+                          x: dept.name,
+                          y: dept.attempt2Average
+                        })),
+                        color: '#ec4899'
+                      }
+                    ]}
+                    margin={{ top: 20, right: 30, bottom: 50, left: 60 }}
+                    xScale={{ type: 'point' }}
+                    yScale={{ type: 'linear', min: 0, max: 100 }}
+                    curve="monotoneX"
+                    axisTop={null}
+                    axisRight={null}
+                    axisBottom={{
+                      tickSize: 0,
+                      tickPadding: 10,
+                      tickRotation: -45,
+                      legend: 'Department',
+                      legendPosition: 'middle',
+                      legendOffset: 40
+                    }}
+                    axisLeft={{
+                      tickSize: 0,
+                      tickPadding: 10,
+                      tickRotation: 0,
+                      legend: 'Average Score (%)',
+                      legendPosition: 'middle',
+                      legendOffset: -50
+                    }}
+                    enableGridX={false}
+                    enableGridY={true}
+                    enablePoints={true}
+                    pointSize={8}
+                    pointColor={{ theme: 'background' }}
+                    pointBorderWidth={2}
+                    pointBorderColor={{ from: 'serieColor' }}
+                    pointLabelYOffset={-12}
+                    useMesh={true}
+                    theme={{
+                      axis: {
+                        ticks: {
+                          text: {
+                            fill: '#6B7280',
+                            fontSize: 12,
+                            fontWeight: 500
+                          }
+                        },
+                        legend: {
+                          text: {
+                            fill: '#374151',
+                            fontSize: 14,
+                            fontWeight: 600
+                          }
+                        }
+                      },
+                      grid: {
+                        line: {
+                          stroke: '#E5E7EB',
+                          strokeWidth: 1,
+                          strokeDasharray: '4 4'
+                        }
+                      },
+                      tooltip: {
+                        container: {
+                          background: 'rgba(255, 255, 255, 0.9)',
+                          backdropFilter: 'blur(4px)',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                          padding: '12px'
+                        }
+                      }
+                    }}
+                    tooltip={({ point }) => (
+                      <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm font-medium text-gray-600">{point.serieId}</span>
+                          <span className="text-sm font-medium text-gray-600">{point.data.xFormatted}</span>
+                          <span className="text-sm font-semibold text-gray-900">{point.data.yFormatted}%</span>
+                        </div>
+                      </div>
+                    )}
+                    legends={[
+                      {
+                        anchor: 'bottom-right',
+                        direction: 'column',
+                        justify: false,
+                        translateX: 100,
+                        translateY: 0,
+                        itemsSpacing: 0,
+                        itemDirection: 'left-to-right',
+                        itemWidth: 80,
+                        itemHeight: 20,
+                        itemOpacity: 0.75,
+                        symbolSize: 12,
+                        symbolShape: 'circle',
+                        symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                        effects: [
+                          {
+                            on: 'hover',
+                            style: {
+                              itemBackground: 'rgba(0, 0, 0, .03)',
+                              itemOpacity: 1
+                            }
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </div>
+              </Card>
+
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Improvement Analysis
                     </Text>
                     <Text className="text-gray-600 mt-2">
