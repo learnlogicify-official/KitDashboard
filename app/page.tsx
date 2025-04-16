@@ -150,11 +150,12 @@ export default function Home() {
 
   if (isLoading) {
   return (
-      <main className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-cyan-50 p-2 md:p-4 lg:p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))]">
-        <div className="flex items-center justify-center h-screen">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4"></div>
-            <Text className="text-lg text-indigo-600">Loading dashboard data...</Text>
+      <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="space-y-8">
+            <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+            </div>
           </div>
         </div>
       </main>
@@ -162,70 +163,72 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-cyan-50 p-2 md:p-4 lg:p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))]">
-      <div className="max-w-[100rem] mx-auto">
+    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8">
-          <div className="flex justify-between items-center bg-white/40 backdrop-blur-lg rounded-2xl p-6 border border-white/50 shadow-xl">
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">NexAcademy Performance Dashboard</h1>
-              <p className="mt-2 text-base text-gray-600">Comprehensive analysis of student performance at NexAcademy</p>
-            </div>
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 shadow-2xl">
+            <h1 className="text-4xl font-bold text-white mb-2">NexAcademy Performance Dashboard</h1>
+            <p className="text-indigo-100 text-lg">Comprehensive analysis of student performance metrics</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <StatsCard
-              title="Total Students"
-              value={stats?.totalStudents || 0}
-              icon={
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              }
-              color="blue"
-            />
-
-            <StatsCard
-              title="Average Score (Attempt 1)"
-              value={`${stats?.overallAttempt1Average.toFixed(2) || '0.00'}%`}
-              icon={
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-              }
-              color="emerald"
-            />
-
-            <StatsCard
-              title="Average Score (Attempt 2)"
-              value={`${stats?.overallAttempt2Average.toFixed(2) || '0.00'}%`}
-              icon={
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-              }
-              color="purple"
-            />
-
-            <StatsCard
-              title="Improvement"
-              value={`${(stats?.overallImprovement || 0) >= 0 ? '+' : ''}${(stats?.overallImprovement || 0).toFixed(2)}%`}
-              icon={
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              }
-              color="amber"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="transform hover:scale-105 transition-all duration-300 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 border-none rounded-2xl p-4">
+              <div className="flex flex-col items-center">
+                <div className="p-2 bg-white/20 rounded-full mb-2">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <Text className="text-white/80 text-sm mb-1">Average Score (Attempt 1)</Text>
+                <Metric className="text-2xl font-bold text-white">
+                  {stats?.overallAttempt1Average.toFixed(1)}%
+                </Metric>
+              </div>
+            </Card>
+            <Card className="transform hover:scale-105 transition-all duration-300 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 border-none rounded-2xl p-4">
+              <div className="flex flex-col items-center">
+                <div className="p-2 bg-white/20 rounded-full mb-2">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <Text className="text-white/80 text-sm mb-1">Average Score (Attempt 2)</Text>
+                <Metric className="text-2xl font-bold text-white">
+                  {stats?.overallAttempt2Average.toFixed(1)}%
+                </Metric>
+              </div>
+            </Card>
+            <Card className="transform hover:scale-105 transition-all duration-300 shadow-lg bg-gradient-to-br from-emerald-500 to-emerald-600 border-none rounded-2xl p-4">
+              <div className="flex flex-col items-center">
+                <div className="p-2 bg-white/20 rounded-full mb-2">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </div>
+                <Text className="text-white/80 text-sm mb-1">Overall Improvement</Text>
+                <Metric className="text-2xl font-bold text-white">
+                  {stats?.overallImprovement >= 0 ? '+' : ''}{stats?.overallImprovement.toFixed(1)}%
+                </Metric>
+              </div>
+            </Card>
+            <Card className="transform hover:scale-105 transition-all duration-300 shadow-lg bg-gradient-to-br from-pink-500 to-pink-600 border-none rounded-2xl p-4">
+              <div className="flex flex-col items-center">
+                <div className="p-2 bg-white/20 rounded-full mb-2">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <Text className="text-white/80 text-sm mb-1">Total Students</Text>
+                <Metric className="text-2xl font-bold text-white">
+                  {stats?.totalStudents}
+                </Metric>
+              </div>
+            </Card>
           </div>
 
           {error && (
-            <div className="mb-8 p-6 bg-red-50/90 backdrop-blur-sm border border-red-200 text-red-700 rounded-2xl shadow-lg">
-              <div className="flex items-center">
-                <svg className="h-6 w-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
-                {error}
-              </div>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <p className="text-red-600">{error}</p>
             </div>
           )}
 
@@ -434,108 +437,162 @@ export default function Home() {
                 )}
               </Card>
 
-              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
-                <div className="flex items-center justify-between mb-8">
+              <Card className="p-6 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-6">
                   <div>
                     <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Score Distribution by Department
                     </Text>
-                    <Text className="text-gray-600 mt-2">
+                    <Text className="text-gray-600 mt-1">
                       Distribution of scores across departments for both attempts
                     </Text>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Attempt 1 Heat Map */}
-                  <div>
-                    <Text className="font-semibold text-lg text-indigo-700 mb-4">
-                      Attempt 1 Score Distribution by Department
-                    </Text>
-                    <div className="h-[400px] w-full bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4 border border-gray-100">
+                    <div className="flex items-center justify-between mb-4">
+                      <Text className="font-semibold text-lg text-indigo-700">Attempt 1</Text>
+                      <Badge color="blue" size="sm">First Assessment</Badge>
+                    </div>
+                    <div className="h-[400px] w-full">
                       <ResponsiveHeatMap
                         data={stats.departments.map(dept => ({
                           id: dept.name,
                           data: dept.scoreRanges.map(range => ({
                             x: range.range,
-                            y: range.attempt1Count
+                            y: Math.round(range.attempt1Count)
                           }))
                         }))}
                         margin={{ top: 20, right: 20, bottom: 60, left: 100 }}
                         axisTop={null}
                         axisRight={null}
                         axisBottom={{
-                          tickSize: 5,
+                          tickSize: 0,
                           tickPadding: 5,
                           tickRotation: 0,
-                          legend: 'Attempt1_Range',
+                          legend: 'Score Range',
                           legendPosition: 'middle',
                           legendOffset: 45
                         }}
                         axisLeft={{
-                          tickSize: 5,
+                          tickSize: 0,
                           tickPadding: 5,
                           tickRotation: 0,
-                          legend: 'DEPARTMENT',
+                          legend: 'Department',
                           legendPosition: 'middle',
                           legendOffset: -70
                         }}
                         colors={{
                           type: 'sequential',
-                          scheme: 'reds',
+                          scheme: 'blues',
                           minValue: 0,
-                          maxValue: 50
+                          maxValue: Math.max(...stats.departments.flatMap(dept => 
+                            dept.scoreRanges.map(range => Math.round(range.attempt1Count))
+                          ))
                         }}
-                        emptyColor="#ffffff"
+                        emptyColor="#f3f4f6"
                         enableLabels={true}
-                        labelTextColor="#000000"
-                        animate={false}
+                        labelTextColor="#1F2937"
+                        animate={true}
+                        motionConfig={{
+                          mass: 1,
+                          tension: 170,
+                          friction: 26,
+                          clamp: false,
+                          precision: 0.01,
+                          velocity: 0
+                        }}
+                        cellOpacity={0.8}
+                        cellHoverOpacity={1}
+                        cellHoverOthersOpacity={0.5}
+                        cellBorderWidth={0}
+                        cellBorderColor="#ffffff"
+                        enableGridX={false}
+                        enableGridY={false}
+                        tooltip={({ cell }) => (
+                          <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200">
+                            <div className="flex flex-col gap-1">
+                              <span className="text-sm font-medium text-gray-600">{cell.serieId}</span>
+                              <span className="text-sm font-medium text-gray-600">Score Range: {cell.x}</span>
+                              <span className="text-sm font-semibold text-gray-900">{Math.round(cell.value || 0)} students</span>
+                            </div>
+                          </div>
+                        )}
                       />
                     </div>
                   </div>
                   
                   {/* Attempt 2 Heat Map */}
-                  <div>
-                    <Text className="font-semibold text-lg text-indigo-700 mb-4">
-                      Attempt 2 Score Distribution by Department
-                    </Text>
-                    <div className="h-[400px] w-full bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4 border border-gray-100">
+                    <div className="flex items-center justify-between mb-4">
+                      <Text className="font-semibold text-lg text-indigo-700">Attempt 2</Text>
+                      <Badge color="purple" size="sm">Second Assessment</Badge>
+                    </div>
+                    <div className="h-[400px] w-full">
                       <ResponsiveHeatMap
                         data={stats.departments.map(dept => ({
                           id: dept.name,
                           data: dept.scoreRanges.map(range => ({
                             x: range.range,
-                            y: range.attempt2Count
+                            y: Math.round(range.attempt2Count)
                           }))
                         }))}
                         margin={{ top: 20, right: 20, bottom: 60, left: 100 }}
                         axisTop={null}
                         axisRight={null}
                         axisBottom={{
-                          tickSize: 5,
+                          tickSize: 0,
                           tickPadding: 5,
                           tickRotation: 0,
-                          legend: 'Attempt2_Range',
+                          legend: 'Score Range',
                           legendPosition: 'middle',
                           legendOffset: 45
                         }}
                         axisLeft={{
-                          tickSize: 5,
+                          tickSize: 0,
                           tickPadding: 5,
                           tickRotation: 0,
-                          legend: 'DEPARTMENT',
+                          legend: 'Department',
                           legendPosition: 'middle',
                           legendOffset: -70
                         }}
                         colors={{
                           type: 'sequential',
-                          scheme: 'reds',
+                          scheme: 'purples',
                           minValue: 0,
-                          maxValue: 30
+                          maxValue: Math.max(...stats.departments.flatMap(dept => 
+                            dept.scoreRanges.map(range => Math.round(range.attempt2Count))
+                          ))
                         }}
-                        emptyColor="#ffffff"
+                        emptyColor="#f3f4f6"
                         enableLabels={true}
-                        labelTextColor="#000000"
-                        animate={false}
+                        labelTextColor="#1F2937"
+                        animate={true}
+                        motionConfig={{
+                          mass: 1,
+                          tension: 170,
+                          friction: 26,
+                          clamp: false,
+                          precision: 0.01,
+                          velocity: 0
+                        }}
+                        cellOpacity={0.8}
+                        cellHoverOpacity={1}
+                        cellHoverOthersOpacity={0.5}
+                        cellBorderWidth={0}
+                        cellBorderColor="#ffffff"
+                        enableGridX={false}
+                        enableGridY={false}
+                        tooltip={({ cell }) => (
+                          <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200">
+                            <div className="flex flex-col gap-1">
+                              <span className="text-sm font-medium text-gray-600">{cell.serieId}</span>
+                              <span className="text-sm font-medium text-gray-600">Score Range: {cell.x}</span>
+                              <span className="text-sm font-semibold text-gray-900">{Math.round(cell.value || 0)} students</span>
+                            </div>
+                          </div>
+                        )}
                       />
                     </div>
                   </div>
@@ -557,34 +614,37 @@ export default function Home() {
                   <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
                     <div className="flex items-center justify-between mb-4">
                       <Text className="font-semibold text-lg text-indigo-700">Top 10 Most Improved Students</Text>
-                      <Badge color="emerald" size="sm">Highest Growth</Badge>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        Highest Growth
+                      </span>
                     </div>
                     <div className="overflow-x-auto">
-                      <table className="w-full">
+                      <table className="w-full rounded-xl overflow-hidden">
                         <thead>
-                          <tr className="border-b border-gray-200">
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Student</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Department</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 1</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 2</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Improvement</th>
+                          <tr className="bg-gradient-to-r from-indigo-600 to-purple-600">
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Student</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Department</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 1</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 2</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Improvement</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-gray-100">
                           {data
                             .filter(student => student.attempt2 > student.attempt1)
                             .sort((a, b) => (b.attempt2 - b.attempt1) - (a.attempt2 - a.attempt1))
                             .slice(0, 10)
                             .map((student, index) => (
-                              <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.name}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.department}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
-                                <td className="py-3 px-4 text-sm">
-                                  <Badge color="emerald" size="sm">
-                                    +{((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
-                                  </Badge>
+                              <tr key={index} className="hover:bg-indigo-50/50 transition-all duration-200">
+                                <td className="py-4 px-6 text-sm text-gray-700 font-medium">{student.name}</td>
+                                <td className="py-4 px-6 text-sm text-gray-700">{student.department}</td>
+                                <td className="py-4 px-6 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
+                                <td className="py-4 px-6 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
+                                <td className="py-4 px-6 text-sm">
+                                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200">
+                                    {student.attempt2 > student.attempt1 ? '+' : ''}
+                                    {((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
+                                  </span>
                                 </td>
                               </tr>
                             ))}
@@ -595,34 +655,37 @@ export default function Home() {
                   <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
                     <div className="flex items-center justify-between mb-4">
                       <Text className="font-semibold text-lg text-indigo-700">Top 10 Most Declined Students</Text>
-                      <Badge color="red" size="sm">Needs Attention</Badge>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        Needs Attention
+                      </span>
                     </div>
                     <div className="overflow-x-auto">
-                      <table className="w-full">
+                      <table className="w-full rounded-xl overflow-hidden">
                         <thead>
-                          <tr className="border-b border-gray-200">
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Student</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Department</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 1</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 2</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Decline</th>
+                          <tr className="bg-gradient-to-r from-rose-600 to-pink-600">
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Student</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Department</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 1</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 2</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Decline</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-gray-100">
                           {data
                             .filter(student => student.attempt2 < student.attempt1)
                             .sort((a, b) => (a.attempt2 - a.attempt1) - (b.attempt2 - b.attempt1))
                             .slice(0, 10)
                             .map((student, index) => (
-                              <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.name}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.department}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
-                                <td className="py-3 px-4 text-sm">
-                                  <Badge color="red" size="sm">
+                              <tr key={index} className="hover:bg-rose-50/50 transition-all duration-200">
+                                <td className="py-4 px-6 text-sm text-gray-700 font-medium">{student.name}</td>
+                                <td className="py-4 px-6 text-sm text-gray-700">{student.department}</td>
+                                <td className="py-4 px-6 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
+                                <td className="py-4 px-6 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
+                                <td className="py-4 px-6 text-sm">
+                                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-200">
+                                    {student.attempt2 > student.attempt1 ? '+' : ''}
                                     {((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
-                                  </Badge>
+                                  </span>
                                 </td>
                               </tr>
                             ))}
@@ -646,27 +709,28 @@ export default function Home() {
                 </div>
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
                   <div className="overflow-x-auto">
-                    <table className="w-full">
+                    <table className="w-full rounded-xl overflow-hidden">
                       <thead>
-                        <tr className="border-b border-gray-200">
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Student</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Department</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 1</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 2</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Improvement</th>
+                        <tr className="bg-gradient-to-r from-indigo-600 to-purple-600">
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Student</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Department</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 1</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 2</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Improvement</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="divide-y divide-gray-100">
                         {paginatedStudents().map((student, index) => (
-                          <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.name}</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.department}</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
-                            <td className="py-3 px-4 text-sm">
-                              <Badge color="emerald" size="sm">
-                                +{((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
-                              </Badge>
+                          <tr key={index} className="hover:bg-indigo-50/50 transition-all duration-200">
+                            <td className="py-4 px-6 text-sm text-gray-700 font-medium">{student.name}</td>
+                            <td className="py-4 px-6 text-sm text-gray-700">{student.department}</td>
+                            <td className="py-4 px-6 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
+                            <td className="py-4 px-6 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
+                            <td className="py-4 px-6 text-sm">
+                              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200">
+                                {student.attempt2 > student.attempt1 ? '+' : ''}
+                                {((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
+                              </span>
                             </td>
                           </tr>
                         ))}
@@ -710,27 +774,28 @@ export default function Home() {
                 </div>
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
                   <div className="overflow-x-auto">
-                    <table className="w-full">
+                    <table className="w-full rounded-xl overflow-hidden">
                       <thead>
-                        <tr className="border-b border-gray-200">
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Student</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Department</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 1</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 2</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Decline</th>
+                        <tr className="bg-gradient-to-r from-rose-600 to-pink-600">
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Student</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Department</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 1</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 2</th>
+                          <th className="py-4 px-6 text-left text-sm font-semibold text-white">Decline</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="divide-y divide-gray-100">
                         {paginatedFollowUpStudents().map((student, index) => (
-                          <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.name}</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.department}</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
-                            <td className="py-3 px-4 text-sm">
-                              <Badge color="red" size="sm">
+                          <tr key={index} className="hover:bg-rose-50/50 transition-all duration-200">
+                            <td className="py-4 px-6 text-sm text-gray-700 font-medium">{student.name}</td>
+                            <td className="py-4 px-6 text-sm text-gray-700">{student.department}</td>
+                            <td className="py-4 px-6 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
+                            <td className="py-4 px-6 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
+                            <td className="py-4 px-6 text-sm">
+                              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-200">
+                                {student.attempt2 > student.attempt1 ? '+' : ''}
                                 {((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
-                              </Badge>
+                              </span>
                             </td>
                           </tr>
                         ))}
@@ -858,28 +923,28 @@ export default function Home() {
                   </div>
                   <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6">
                     <div className="overflow-x-auto">
-                      <table className="w-full">
+                      <table className="w-full rounded-xl overflow-hidden">
                         <thead>
-                          <tr className="border-b border-gray-200">
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Student Name</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Department</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 1</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Attempt 2</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Improvement</th>
+                          <tr className="bg-gradient-to-r from-blue-600 to-cyan-600">
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Student Name</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Department</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 1</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Attempt 2</th>
+                            <th className="py-4 px-6 text-left text-sm font-semibold text-white">Improvement</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-gray-100">
                           {paginatedBatchStudents().map((student, index) => (
-                            <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                              <td className="py-3 px-4 text-sm text-gray-700">{student.name}</td>
-                              <td className="py-3 px-4 text-sm text-gray-700">{student.department}</td>
-                              <td className="py-3 px-4 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
-                              <td className="py-3 px-4 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
-                              <td className="py-3 px-4 text-sm">
-                                <Badge color={student.attempt2 > student.attempt1 ? "emerald" : "red"} size="sm">
+                            <tr key={index} className="hover:bg-blue-50/50 transition-all duration-200">
+                              <td className="py-4 px-6 text-sm text-gray-700 font-medium">{student.name}</td>
+                              <td className="py-4 px-6 text-sm text-gray-700">{student.department}</td>
+                              <td className="py-4 px-6 text-sm text-gray-700">{student.attempt1.toFixed(1)}%</td>
+                              <td className="py-4 px-6 text-sm text-gray-700">{student.attempt2.toFixed(1)}%</td>
+                              <td className="py-4 px-6 text-sm">
+                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200">
                                   {student.attempt2 > student.attempt1 ? '+' : ''}
                                   {((student.attempt2 - student.attempt1) / student.attempt1 * 100).toFixed(1)}%
-                                </Badge>
+                                </span>
                               </td>
                             </tr>
                           ))}
@@ -913,7 +978,7 @@ export default function Home() {
             </>
           )}
         </div>
-      </div>
+    </div>
     </main>
   );
 }
