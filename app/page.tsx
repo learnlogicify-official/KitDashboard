@@ -150,7 +150,7 @@ export default function Home() {
 
   if (isLoading) {
   return (
-      <main className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-2 md:p-4 lg:p-6">
+      <main className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-cyan-50 p-2 md:p-4 lg:p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))]">
         <div className="flex items-center justify-center h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4"></div>
@@ -162,17 +162,17 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-2 md:p-4 lg:p-6">
+    <main className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-cyan-50 p-2 md:p-4 lg:p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))]">
       <div className="max-w-[100rem] mx-auto">
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
+        <div className="space-y-8">
+          <div className="flex justify-between items-center bg-white/40 backdrop-blur-lg rounded-2xl p-6 border border-white/50 shadow-xl">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">NexAcademy Performance Dashboard</h1>
-              <p className="mt-1 text-sm text-slate-500">Comprehensive analysis of student performance at NexAcademy</p>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">NexAcademy Performance Dashboard</h1>
+              <p className="mt-2 text-base text-gray-600">Comprehensive analysis of student performance at NexAcademy</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <StatsCard
               title="Total Students"
               value={stats?.totalStudents || 0}
@@ -219,9 +219,9 @@ export default function Home() {
           </div>
 
           {error && (
-            <div className="mb-8 p-4 bg-red-50/80 backdrop-blur-sm border border-red-200 text-red-700 rounded-xl shadow-lg">
+            <div className="mb-8 p-6 bg-red-50/90 backdrop-blur-sm border border-red-200 text-red-700 rounded-2xl shadow-lg">
               <div className="flex items-center">
-                <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="h-6 w-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
                 {error}
@@ -231,10 +231,10 @@ export default function Home() {
 
           {stats && (
             <>
-              <Card className="p-8 shadow-xl rounded-2xl border border-indigo-100/50 bg-white/80 backdrop-blur-sm mb-8">
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <Text className="font-semibold text-2xl text-indigo-700">
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       {selectedDepartment ? `${selectedDepartment.name} Score Distribution` : 'Score Distribution'}
                     </Text>
                     <Text className="text-gray-600 mt-1">
@@ -274,7 +274,7 @@ export default function Home() {
                     padding={0.3}
                     valueScale={{ type: 'linear' }}
                     indexScale={{ type: 'band', round: true }}
-                    colors={['#3B82F6', '#EC4899']}
+                    colors={['#6366f1', '#ec4899']}
                     theme={{
                       ...theme,
                       axis: {
@@ -382,7 +382,7 @@ export default function Home() {
                       </div>
                     )}
                     enableLabel={true}
-                    label={d => d.value}
+                    label={d => `${d.value}`}
                     borderRadius={4}
                     innerPadding={2}
                   />
@@ -434,13 +434,13 @@ export default function Home() {
                 )}
               </Card>
 
-              <Card className="p-8 shadow-xl rounded-2xl border border-indigo-100/50 bg-white/80 backdrop-blur-sm mb-8">
-                <div className="flex items-center justify-between mb-6">
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <Text className="font-semibold text-2xl text-indigo-700">
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Score Distribution by Department
                     </Text>
-                    <Text className="text-gray-600 mt-1">
+                    <Text className="text-gray-600 mt-2">
                       Distribution of scores across departments for both attempts
                     </Text>
                   </div>
@@ -542,13 +542,13 @@ export default function Home() {
                 </div>
               </Card>
 
-              <Card className="p-8 shadow-xl rounded-2xl border border-indigo-100/50 bg-white/80 backdrop-blur-sm mb-8">
-                <div className="flex items-center justify-between mb-6">
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <Text className="font-semibold text-2xl text-indigo-700">
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Improvement Analysis
                     </Text>
-                    <Text className="text-gray-600 mt-1">
+                    <Text className="text-gray-600 mt-2">
                       Track student performance trends and identify areas for improvement
                     </Text>
                   </div>
@@ -633,13 +633,13 @@ export default function Home() {
                 </div>
               </Card>
 
-              <Card className="p-8 shadow-xl rounded-2xl border border-indigo-100/50 bg-white/80 backdrop-blur-sm mb-8">
-                <div className="flex items-center justify-between mb-6">
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <Text className="font-semibold text-2xl text-indigo-700">
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Students Needing Further Support
                     </Text>
-                    <Text className="text-gray-600 mt-1">
+                    <Text className="text-gray-600 mt-2">
                       Students who are improving but still scoring below 40%
                     </Text>
                   </div>
@@ -697,13 +697,13 @@ export default function Home() {
                 </div>
               </Card>
 
-              <Card className="p-8 shadow-xl rounded-2xl border border-indigo-100/50 bg-white/80 backdrop-blur-sm mb-8">
-                <div className="flex items-center justify-between mb-6">
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <Text className="font-semibold text-2xl text-indigo-700">
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Students Needing Follow-up
                     </Text>
-                    <Text className="text-gray-600 mt-1">
+                    <Text className="text-gray-600 mt-2">
                       Students who dropped drastically (15% or more)
                     </Text>
                   </div>
@@ -761,14 +761,13 @@ export default function Home() {
                 </div>
               </Card>
 
-              {/* Student Performance Clusters */}
-              <Card className="p-8 shadow-xl rounded-2xl border border-indigo-100/50 bg-white/80 backdrop-blur-sm mb-8">
-                <div className="flex items-center justify-between mb-6">
+              <Card className="p-8 shadow-2xl rounded-2xl border border-white/50 bg-white/40 backdrop-blur-lg">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <Text className="font-semibold text-2xl text-indigo-700">
+                    <Text className="font-semibold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                       Student Performance Clusters
                     </Text>
-                    <Text className="text-gray-600 mt-1">
+                    <Text className="text-gray-600 mt-2">
                       Students grouped into 4 equal-sized batches based on performance
                     </Text>
                   </div>
@@ -914,7 +913,7 @@ export default function Home() {
             </>
           )}
         </div>
-    </div>
+      </div>
     </main>
   );
 }
