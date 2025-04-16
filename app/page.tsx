@@ -147,7 +147,7 @@ export default function Home() {
   const totalBatchPages = Math.ceil(getBatchStudents().length / studentsPerPage);
 
   if (isLoading) {
-    return (
+  return (
       <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-4 md:p-8 lg:p-12">
         <div className="flex items-center justify-center h-screen">
           <div className="text-center">
@@ -748,7 +748,7 @@ export default function Home() {
             </Card>
           </>
         )}
-      </div>
+    </div>
     </main>
   );
 }
