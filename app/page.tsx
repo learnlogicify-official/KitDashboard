@@ -78,6 +78,7 @@ export default function Home() {
   }, []);
 
   const getBarData = (ranges: any[]) => {
+    console.log('Score Ranges Data:', ranges);
     return ranges.map(range => ({
       range: range.range,
       'Attempt 1': range.attempt1Count,
@@ -282,26 +283,29 @@ export default function Home() {
                     indexBy="range"
                     margin={{ top: 20, right: 30, bottom: 50, left: 60 }}
                     padding={0.3}
-                    valueScale={{ type: 'linear' }}
+                    valueScale={{ type: 'linear', min: 0, max: 'auto' }}
                     indexScale={{ type: 'band', round: true }}
                     colors={['#6366f1', '#ec4899']}
+                    groupMode="grouped"
+                    layout="vertical"
+                    innerPadding={2}
+                    borderRadius={4}
+                    enableLabel={false}
                     theme={{
                       ...theme,
                       axis: {
                         ...theme.axis,
                         ticks: {
-                          ...theme.axis.ticks,
                           text: {
-                            ...theme.axis.ticks.text,
-                            fontSize: 11,
+                            fill: '#6B7280',
+                            fontSize: 12,
                             fontWeight: 500,
-                            fill: '#4B5563',
                           },
                         },
                         legend: {
                           text: {
-                            fill: '#1F2937',
-                            fontSize: 12,
+                            fill: '#374151',
+                            fontSize: 14,
                             fontWeight: 600,
                           },
                         },
@@ -341,19 +345,17 @@ export default function Home() {
                       legend: 'Number of Students',
                       legendPosition: 'middle',
                       legendOffset: -50,
+                      tickValues: 5,
                     }}
-                    labelSkipWidth={12}
-                    labelSkipHeight={12}
-                    labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                     legends={[
                       {
                         dataFrom: 'keys',
                         anchor: 'bottom-right',
-                        direction: 'column',
+                        direction: 'row',
                         justify: false,
-                        translateX: 120,
-                        translateY: 0,
-                        itemsSpacing: 2,
+                        translateX: 0,
+                        translateY: 50,
+                        itemsSpacing: 4,
                         itemWidth: 100,
                         itemHeight: 20,
                         itemDirection: 'left-to-right',
@@ -364,11 +366,11 @@ export default function Home() {
                           {
                             on: 'hover',
                             style: {
-                              itemOpacity: 1,
-                            },
-                          },
-                        ],
-                      },
+                              itemOpacity: 1
+                            }
+                          }
+                        ]
+                      }
                     ]}
                     animate={true}
                     motionConfig={{
@@ -382,19 +384,76 @@ export default function Home() {
                     enableGridY={true}
                     enableGridX={false}
                     barAriaLabel={e => `${e.id}: ${e.value} in ${e.indexValue}`}
-                    tooltip={({ id, value, color }) => (
-                      <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200">
-                        <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-                          <span className="font-medium text-gray-700">{id}:</span>
-                          <span className="font-semibold text-gray-900">{value} students</span>
+                    tooltip={({ id, value, indexValue, data }) => {
+                      const attempt1 = data['Attempt 1'];
+                      const attempt2 = data['Attempt 2'];
+                      return (
+                        <div style={{
+                          background: 'white',
+                          padding: '12px',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                          border: '1px solid #E5E7EB',
+                          fontSize: '14px',
+                          fontFamily: 'sans-serif'
+                        }}>
+                          <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>
+                            Score Range: {indexValue}
+                          </div>
+                          <div style={{ marginBottom: '8px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
+                              <div style={{ width: '12px', height: '12px', backgroundColor: '#6366f1', marginRight: '8px', borderRadius: '50%' }} />
+                              <span>Attempt 1: {attempt1} students</span>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                              <div style={{ width: '12px', height: '12px', backgroundColor: '#ec4899', marginRight: '8px', borderRadius: '50%' }} />
+                              <span>Attempt 2: {attempt2} students</span>
+                            </div>
+                          </div>
+                          <div style={{ fontWeight: 'bold' }}>
+                            Total Students: {attempt1 + attempt2}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                    enableLabel={true}
-                    label={d => `${d.value}`}
-                    borderRadius={4}
-                    innerPadding={2}
+                      );
+                    }}
+                    barComponent={({ bar, ...props }) => {
+                      const baseHeight = 20;
+                      const proportionalHeight = bar.data.value > 0 ? bar.height : 0;
+                      const height = baseHeight + proportionalHeight;
+                      const textY = bar.y + (bar.height - height) + Math.min(height / 2, 20);
+                      return (
+                        <g>
+                          <rect
+                            {...props}
+                            x={bar.x}
+                            y={bar.y + (bar.height - height)}
+                            width={bar.width}
+                            height={height}
+                            fill={bar.color}
+                            rx={4}
+                            ry={4}
+                            style={{
+                              transition: 'all 0.2s ease',
+                              cursor: 'pointer',
+                            }}
+                          />
+                          <text
+                            x={bar.x + bar.width / 2}
+                            y={textY}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            style={{
+                              fill: '#ffffff',
+                              fontSize: '14px',
+                              fontWeight: 600,
+                              textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                            }}
+                          >
+                            {bar.data.value}
+                          </text>
+                        </g>
+                      );
+                    }}
                   />
                 </div>
                 {selectedDepartment && (
