@@ -421,10 +421,20 @@ export default function Home() {
                       const proportionalHeight = bar.data.value > 0 ? bar.height : 0;
                       const height = baseHeight + proportionalHeight;
                       const textY = bar.y + (bar.height - height) + Math.min(height / 2, 20);
+                      
+                      // Extract event handlers from props
+                      const { onClick, onMouseEnter, onMouseLeave, ...restProps } = props;
+                      
+                      // Create a properly typed data object with the required color property
+                      const eventData = {
+                        ...bar.data,
+                        color: bar.color
+                      };
+                      
                       return (
                         <g>
                           <rect
-                            {...props}
+                            {...restProps}
                             x={bar.x}
                             y={bar.y + (bar.height - height)}
                             width={bar.width}
@@ -436,6 +446,9 @@ export default function Home() {
                               transition: 'all 0.2s ease',
                               cursor: 'pointer',
                             }}
+                            onClick={(e) => onClick?.(eventData, e)}
+                            onMouseEnter={(e) => onMouseEnter?.(eventData, e)}
+                            onMouseLeave={(e) => onMouseLeave?.(eventData, e)}
                           />
                           <text
                             x={bar.x + bar.width / 2}
